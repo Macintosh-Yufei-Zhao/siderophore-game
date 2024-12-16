@@ -2,6 +2,8 @@ import numpy as np
 import scipy.integrate as ode
 import matplotlib.pyplot as plt
 import random as rd
+from tqdm import tqdm  
+import time  
 
 migr = 0                       # migration constant \sigma
 # epsilon = np.ones(siderSize)        # siderophore synthesis rate constant
@@ -40,6 +42,9 @@ def equation(t,z):
     
     return [dm1dt, dm2dt, dr1dt, dr2dt, dirondt, dv12dt, dv21dt]
 
+progress_bar = tqdm(total=101)                          # progress bar, make the simulation progress visible and weaken the boredom...?
+ 
+
 timespan=(0,2000)
 timeeval=np.linspace(0,2000,2001)
 m1data=np.zeros((101,101))
@@ -56,10 +61,11 @@ for i in range(0,101):
         #z02 = [0.01, 1, 1, 1, 1, 0.5, 0.5]
         #results=ode.solve_ivp(equation, timespan, z02, t_eval=timeeval)
         m2data[i,j]=results.y[1,2000]
-    # print("\n")
+    progress_bar.update(1)
+progress_bar.close()
 
-log_m1=np.log10(m1data)
-log_m2=np.log10(m2data)
+log_m1=np.transpose(np.log10(m1data))
+log_m2=np.transpose(np.log10(m2data))
 
 #for i in range (0,100):
     #print('m1=',log_m1[0,i],' m2=',log_m2[0,i],'\n')
@@ -74,7 +80,7 @@ plt.ylabel('alpha20')
 plt.savefig('2factor-rec-fdbk-1.png')
 
 plt.imshow(log_m2, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
-plt.colorbar()                                                                  # 添加颜色条
+# plt.colorbar()                                                                  # 添加颜色条
 plt.xticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置x轴的刻度
 plt.yticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置y轴的刻度
 plt.title('Biomass of species 2')
