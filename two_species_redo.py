@@ -34,8 +34,10 @@ def equation(t,z):
 
 timespan=(0,2000)
 timeeval=np.linspace(0,2000,2001)
-m1data=np.zeros((101,101))
-m2data=np.zeros((101,101))
+m1maj1data=np.zeros((101,101))
+m2maj1data=np.zeros((101,101))
+m1maj2data=np.zeros((101,101))
+m2maj2data=np.zeros((101,101))
 for i in range(0,101):
     for j in range(0,101):
         v11=i/100
@@ -44,30 +46,52 @@ for i in range(0,101):
         v21=1-v22
         z01 = [1, 0.01, 1, 1, 1]
         results=ode.solve_ivp(equation, timespan, z01, t_eval=timeeval)
-        m1data[i,j]=results.y[0,2000]
+        m1maj1data[i,j]=results.y[0,2000]
+        m2maj1data[i,j]=results.y[1,2000]
         z02 = [0.01, 1, 1, 1, 1]
         results=ode.solve_ivp(equation, timespan, z02, t_eval=timeeval)
-        m2data[i,j]=results.y[1,2000]
+        m1maj2data[i,j]=results.y[0,2000]
+        m2maj2data[i,j]=results.y[1,2000]
     # print("\n")
 
-log_m1=np.log10(m1data)
-log_m2=np.log10(m2data)
+log_m1maj1=np.log10(m1maj1data)
+log_m1maj2=np.log10(m1maj2data)
+log_m2maj1=np.log10(m2maj1data)
+log_m2maj2=np.log10(m2maj2data)
 
 
-plt.imshow(log_m1, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
+plt.imshow(log_m1maj1, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
 plt.colorbar()                                                                  # 添加颜色条
 plt.xticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置x轴的刻度
 plt.yticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置y轴的刻度
-plt.title('Biomass of species 1')
+plt.title('Biomass of species 1 with 1 major')
 plt.xlabel('v11')
 plt.ylabel('v22')
-plt.savefig('2factor-m1.png')
+plt.savefig('2factor-m1maj1.png')
 
-plt.imshow(log_m2, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
+plt.imshow(log_m2maj1, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
 plt.colorbar()                                                                  # 添加颜色条
 plt.xticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置x轴的刻度
 plt.yticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置y轴的刻度
-plt.title('Biomass of species 2')
+plt.title('Biomass of species 2 with 1 major')
 plt.xlabel('v11')
 plt.ylabel('v22')
-plt.savefig('2factor-m2.png')
+plt.savefig('2factor-m2maj1.png')
+
+plt.imshow(log_m1maj2, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
+plt.colorbar()                                                                  # 添加颜色条
+plt.xticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置x轴的刻度
+plt.yticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置y轴的刻度
+plt.title('Biomass of species 1 with 2 major')
+plt.xlabel('v11')
+plt.ylabel('v22')
+plt.savefig('2factor-m1maj2.png')
+
+plt.imshow(log_m2maj2, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
+plt.colorbar()                                                                  # 添加颜色条
+plt.xticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置x轴的刻度
+plt.yticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置y轴的刻度
+plt.title('Biomass of species 2 with 2 major')
+plt.xlabel('v11')
+plt.ylabel('v22')
+plt.savefig('2factor-m2maj2.png')
