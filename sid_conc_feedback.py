@@ -2,6 +2,22 @@ import numpy as np
 import scipy.integrate as ode
 import matplotlib.pyplot as plt
 
+import data_process as dp
+
+# file request: two .txt, with matrix of alpha and v
+
+# input
+
+# resource assignment
+fileinput=input('path to your alpha file:')
+alpha, n1, n2 = dp.read_matrix(fileinput)   
+# receptor assignment, this also get the size of the system                           
+fileinput=input('path to your alpha file:')
+v, speciesSize, siderSize = dp.read_matrix(fileinput)
+
+supply = 1
+
+
 # parameters
 
 migr = 1e-8                         # migration constant \sigma
@@ -71,16 +87,7 @@ def total(t,z) :
 
 
 
-# input
 
-speciesSize = 2                     # N_spe
-siderSize = 2                       # N_sid
-
-alpha = np.zeros((speciesSize,siderSize+1))             # resource assignment
-
-v = np.zeros((speciesSize,siderSize))                   # receptor assignment
-
-supply = 1
 
 
 
@@ -89,6 +96,8 @@ supply = 1
 # initial states
 
 z0=
+
+timespan=
 timespan=(0,100)
 # time_eval=np.linspace(0,100,1000)
 
