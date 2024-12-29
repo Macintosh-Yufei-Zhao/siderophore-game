@@ -2,6 +2,7 @@ import numpy as np
 import scipy.integrate as ode
 import matplotlib.pyplot as plt
 import random as rd
+import os
 
 migr = 0                       # migration constant \sigma
 # epsilon = np.ones(siderSize)        # siderophore synthesis rate constant
@@ -59,6 +60,8 @@ log_m1maj2=np.log10(m1maj2data)
 log_m2maj1=np.log10(m2maj1data)
 log_m2maj2=np.log10(m2maj2data)
 
+savepath='241229'
+os.makedirs(savepath)
 
 plt.imshow(log_m1maj1, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
 plt.colorbar()                                                                  # 添加颜色条
@@ -67,7 +70,8 @@ plt.yticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  
 plt.title('Biomass of species 1 with 1 major')
 plt.xlabel('v11')
 plt.ylabel('v22')
-plt.savefig('2factor-m1maj1.png')
+plt.savefig(savepath+'/2factor-m1maj1.png')
+plt.close()
 
 plt.imshow(log_m2maj1, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
 plt.colorbar()                                                                  # 添加颜色条
@@ -76,7 +80,8 @@ plt.yticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  
 plt.title('Biomass of species 2 with 1 major')
 plt.xlabel('v11')
 plt.ylabel('v22')
-plt.savefig('2factor-m2maj1.png')
+plt.savefig(savepath+'/2factor-m2maj1.png')
+plt.close()
 
 plt.imshow(log_m1maj2, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
 plt.colorbar()                                                                  # 添加颜色条
@@ -85,13 +90,15 @@ plt.yticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  
 plt.title('Biomass of species 1 with 2 major')
 plt.xlabel('v11')
 plt.ylabel('v22')
-plt.savefig('2factor-m1maj2.png')
+plt.savefig(savepath+'/2factor-m1maj2.png')
+plt.close()
 
 plt.imshow(log_m2maj2, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
 plt.colorbar()                                                                  # 添加颜色条
 plt.xticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置x轴的刻度
-plt.yticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置y轴的刻度
+plt.yticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.python two_species_redo.pypython two_species_redo.py6', '0.8', '1.0'])  # 设置y轴的刻度
 plt.title('Biomass of species 2 with 2 major')
 plt.xlabel('v11')
 plt.ylabel('v22')
-plt.savefig('2factor-m2maj2.png')
+plt.savefig(savepath+'/2factor-m2maj2.png')
+plt.close()
