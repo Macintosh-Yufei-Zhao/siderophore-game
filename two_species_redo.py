@@ -60,9 +60,10 @@ log_m1maj2=np.log10(m1maj2data)
 log_m2maj1=np.log10(m2maj1data)
 log_m2maj2=np.log10(m2maj2data)
 
-savepath='241229'
+savepath='241230'
 os.makedirs(savepath)
 
+# the following graphing is included in graphing.py
 plt.imshow(log_m1maj1, cmap='coolwarm', interpolation='nearest', aspect='auto',origin='lower')
 plt.colorbar()                                                                  # 添加颜色条
 plt.xticks([0, 20, 40, 60, 80, 100], ['0', '0.2', '0.4', '0.6', '0.8', '1.0'])  # 设置x轴的刻度
