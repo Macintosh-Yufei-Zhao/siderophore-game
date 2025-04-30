@@ -31,3 +31,15 @@ def find_amplitude(x):
         amp[i]=abs(x[pos_peaks[i]]-x[neg_peaks[i]])
     return max(amp)
 
+def find_period(x):
+    from scipy.signal import find_peaks
+    import numpy as np
+    """
+    :param x: concentration
+    :return: the period of the concentration
+    """
+    pos_peaks,_=find_peaks(x)
+    period=np.zeros(len(pos_peaks)-1)
+    for i in range (0,len(pos_peaks)-1):
+        period[i]=abs(pos_peaks[i+1]-pos_peaks[i])
+    return float(find_most_frequent_number(period))
